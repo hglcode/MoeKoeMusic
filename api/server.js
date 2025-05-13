@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const express = require('express');
-const decode = require('safe-decode-uri-component');
+const decode = decodeURI; //require('safe-decode-uri-component');
 const { cookieToJson } = require('./util/util');
 const { createRequest } = require('./util/request');
 const dotenv = require('dotenv');
