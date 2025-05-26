@@ -51,7 +51,7 @@
 - [ ] 📺 支持 MV 播放
 - [x] 🌚 Light/Dark Mode 自动切换
 - [ ] 👆 支持 Touch Bar
-- [ ] 🖥️ 支持 PWA，可在 Chrome/Edge 里点击地址栏右边的 ➕ 安装到电脑
+- [x] 🖥️ 支持 PWA，可在 Chrome/Edge 里点击地址栏右边的 ➕ 安装到电脑
 - [ ] 🟥 支持 Last.fm Scrobble
 - [ ] 🎧 支持 Mpris
 - [x] ⌨️ 全局快捷键
@@ -64,7 +64,51 @@
 
 ## 📦️ 安装
 
+### 客户端安装
+
 访问本项目的 [Releases](https://github.com/iAJue/MoeKoeMusic/releases) 页面下载安装包。
+
+### WEB端安装（docker）
+
+* 注意：部署后请开放服务器对应端口才可使用，或者使用反向代理实现域名访问。
+
+> 方式一：快速启动（推荐）
+
+```
+git clone https://github.com/iAJue/MoeKoeMusic.git
+cd MoeKoeMusic
+docker compose up -d &
+```
+
+> ~~方式二：使用docker-compose一键安装 （镜像暂未上传官方）~~
+
+```
+docker run -d --name MoeKoeMusic -p 8080:8080 iajue/moekoe-music:latest
+```
+
+> 方式三：宝塔容器编排
+
+远程镜像，版本可能会落后于官方
+
+```
+version: '3.3'
+
+services:
+  moekoe-music:
+    # 镜像地址
+    image: registry.cn-wulanchabu.aliyuncs.com/youngxj/moekoe-music:latest
+    container_name: moekoe-music # 容器名
+    restart: unless-stopped # 自动重启
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: # 端口映射
+      - "8080:8080"  # 前端服务
+      - "6521:6521"  # 接口服务
+
+```
+
+复制内容上面的内容，粘贴到宝塔面板的容器编排里面，编排名称为MoeKoeMusic，点击部署即可。
 
 ## ⚙️ 开发
 
